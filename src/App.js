@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import RocketLauncher from './RocketLauncher'
 import './App.css';
 
 function App() {
+  let [launch, setLaunch] = useState(true)
+  let [rocketName, setRocketName] = useState('Apollo')
+
+  const handleChange = (e) => {
+    setRocketName(e.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <h1>{rocketName}</h1>
+      <button onClick={() => setLaunch(!launch)}>{ launch ? "Abort Rocket Launch" : "Start Rocket Launch"}</button>
+      { launch ? <RocketLauncher/> : null }
+      <input type="text" onChange={handleChange}/>
+    </main>
   );
 }
 
